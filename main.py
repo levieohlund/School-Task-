@@ -1,7 +1,7 @@
 #Huvudmeny för för övervakningssystemet och larm
 
 import time
-import monitor  # Add this import
+import monitor  
 
 #Första menyn som även är huvumenyn i programmet 
 def main_menu():
@@ -20,7 +20,7 @@ def main_menu():
             print("Exiting...")
             break
         elif choice == "1":
-            # Fix these lines - they have syntax errors
+            
             cpu = monitor.get_cpu_usage()
             mem_pct, mem_used, mem_total = monitor.get_memory_usage()
             disk_pct, disk_used, disk_total = monitor.get_disk_usage()
