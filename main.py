@@ -1,8 +1,13 @@
 #Huvudmeny för för övervakningssystemet och larm
 
 import time
+<<<<<<< HEAD
 import monitor  # Add this import
 from alarm import create_alarm_menu, show_alarms_menu, check_alarms
+=======
+import monitor  
+
+>>>>>>> e7d6feda869cb517ba93a40a8238d4d9822b7097
 #Första menyn som även är huvumenyn i programmet 
 def main_menu():
 
@@ -20,7 +25,10 @@ def main_menu():
             print("Exiting...")
             break
         elif choice == "1":
+<<<<<<< HEAD
             # Show current CPU, memory, and disk usage
+=======
+>>>>>>> e7d6feda869cb517ba93a40a8238d4d9822b7097
             
             cpu = monitor.get_cpu_usage()
             mem_pct, mem_used, mem_total = monitor.get_memory_usage()
