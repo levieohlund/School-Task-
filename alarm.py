@@ -1,14 +1,14 @@
 #list for alarm 
 alarms = []
 
-class Alarm:
-    def __init__(self, metric, threshold, condition):
-        self.metric = metric  # 'cpu', 'memory', or 'disk'
+class Alarm: #Alarm class to hold alarm details
+    def __init__(self, monitor_type, threshold, condition):
+        self.monitor_type = monitor_type  # 'cpu', 'memory', or 'disk'
         self.threshold = threshold  # percentage value
         self.condition = condition  # 'above' or 'below'
 
-    def __str__(self):
-        return f"Alarm: {self.metric} {self.condition} {self.threshold}%"
+    def __str__(self): #String representation of the alarm
+        return f"Alarm: {self.monitor_type} {self.condition} {self.threshold}%"
 
 def add_alarm(alarm):
     alarms.append(alarm)
@@ -56,7 +56,7 @@ def show_alarms_menu():
     if not alarms:
         print("No active Alarms.")
     else:
-        for idx, alarm in enumerate(alarms, start=1):
+        for idx, alarm in enumerate(alarms, start=1): 
             print(f"{idx}. {alarm}")
     input("\nPress Enter to continue...")
     
@@ -65,11 +65,12 @@ def check_alarms(cpu, memory, disk):
     triggered_alarms = []
 
     for alarm in alarms:
-        if alarm.metric in current_values:
-            if alarm.condition == "above" and current_values[alarm.metric] > alarm.threshold:
-                triggered_alarms.append(f"Triggered: {alarm}")
-            elif alarm.condition == "below" and current_values[alarm.metric] < alarm.threshold:
-                triggered_alarms.append(f"Triggered: {alarm}")
+        if alarm.monitor_type in current_values: # Kontrollera om alarmets monitor_type finns i current_values
+            current_value = current_values[alarm.monitor_type] # Hämta det aktuella värdet för monitor_type
+            if alarm.condition == "above" and current_value > alarm.threshold: # Kontrollera om villkoret är uppfyllt
+                triggered_alarms.append(f" ALARM: {alarm.monitor_type.upper()} is {current_value}% (above {alarm.threshold}%)")
+            elif alarm.condition == "below" and current_value < alarm.threshold:
+                triggered_alarms.append(f" ALARM: {alarm.monitor_type.upper()} is {current_value}% (below {alarm.threshold}%)")
 
     return triggered_alarms
 
