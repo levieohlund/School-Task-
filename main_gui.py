@@ -3,7 +3,7 @@ from tkinter import ttk, scrolledtext, messagebox
 import threading
 import time
 import monitor
-from alarm import create_alarm_menu, show_alarms_menu, check_alarms, alarms, add_alarm, Alarm
+from alarm import create_alarm_menu, show_alarms_menu, check_alarms, alarms, add_alarm
 
 class MonitoringGUI:
     def __init__(self, root):

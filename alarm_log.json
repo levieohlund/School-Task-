@@ -1,0 +1,48 @@
+[
+  {
+    "time": "2025-10-16 16:03:24",
+    "type": "cpu",
+    "threshold": 20,
+    "condition": "below"
+  },
+  {
+    "type": "cpu",
+    "threshold": 20,
+    "condition": "below"
+  },
+  {
+    "type": "memory",
+    "threshold": 20,
+    "condition": "below"
+  },
+  {
+    "type": "disk",
+    "threshold": 70,
+    "condition": "below"
+  },
+  {
+    "type": "cpu",
+    "threshold": 80,
+    "condition": "above"
+  },
+  {
+    "type": "cpu",
+    "threshold": 80,
+    "condition": "above"
+  },
+  {
+    "type": "memory",
+    "threshold": 70,
+    "condition": "below"
+  },
+  {
+    "type": "disk",
+    "threshold": 90,
+    "condition": "above"
+  },
+  {
+    "type": "cpu",
+    "threshold": 10,
+    "condition": "above"
+  }
+]
