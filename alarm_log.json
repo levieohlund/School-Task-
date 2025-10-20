@@ -44,5 +44,45 @@
     "type": "cpu",
     "threshold": 10,
     "condition": "above"
+  },
+  {
+    "type": "cpu",
+    "threshold": 10,
+    "condition": "below"
+  },
+  {
+    "type": "cpu",
+    "threshold": 1,
+    "condition": "above"
+  },
+  {
+    "type": "memory",
+    "threshold": 20,
+    "condition": "above"
+  },
+  {
+    "type": "cpu",
+    "threshold": 10,
+    "condition": "below"
+  },
+  {
+    "type": "cpu",
+    "threshold": 10,
+    "condition": "below"
+  },
+  {
+    "type": "cpu",
+    "threshold": 10,
+    "condition": "below"
+  },
+  {
+    "type": "cpu",
+    "threshold": 20,
+    "condition": "above"
+  },
+  {
+    "type": "disk",
+    "threshold": 30,
+    "condition": "below"
   }
 ]

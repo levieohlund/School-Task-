@@ -6,9 +6,9 @@ import logger # Import the logger module for logging alarms
 
 def main_menu(): 
 
-    alarm = [] # List to hold active alarms
+    alarms = [] # List to hold active alarms
 
-    active = False # Track if monitoring is active
+    active = False # see if the monitoring is active or not 
 
     while True: # Main menu loop
         print("\n--- Main Menu ---")
@@ -21,13 +21,10 @@ def main_menu():
         print("7. Exit")
 
         choice = input("\nChoose an option: ").strip()
-        
-        if choice == "7":
-            print("Exiting...")
-            break
-        elif choice == "1":
+
+        if choice == "1":
             # Show current CPU, memory, and disk usage
-            active = True  # Activate monitoring
+            active = True  # check that monitoring is active 
             print("Monitoring has started!")
 
             cpu = monitor.get_cpu_usage()
@@ -39,22 +36,22 @@ def main_menu():
             press_enter_to_continue()
 
         elif choice == "2":
-            monitoring_status = monitor.list_active_monitoring(active) # Get active monitoring status
             print("\nActive Monitoring:")
-            for status in monitoring_status: # Display each active monitoring status
-                print(f"- {status}") # Display each active monitoring status
-            press_enter_to_continue() #
+            print("- CPU Usage")
+            print("- Memory Usage") 
+            print("- Disk Usage")
+            press_enter_to_continue()
 
         elif choice == "3":
-            create_alarm_menu(alarm)
+            create_alarm_menu(alarms) # Create a new alarm from the list of alarms
 
         elif choice == "4":
-            show_alarms_menu(alarm)
+            show_alarms_menu(alarms) # Show the list of active alarms
 
         elif choice == "5":
             try:
                 alarm_number = int(input("Enter alarm number to remove: ")) - 1
-                if remove_alarm(alarm, alarm_number):
+                if remove_alarm(alarms, alarm_number):
                     print("Alarm removed successfully.")
                 else:
                     print("Invalid alarm number.")
@@ -63,12 +60,14 @@ def main_menu():
             press_enter_to_continue()
 
         elif choice == "6":
-            monitor.start_continuous_monitoring(alarm, check_alarms, press_enter_to_continue)
-            
+            monitor.start_continuous_monitoring(alarms, check_alarms, press_enter_to_continue)
+        elif choice == "7":
+            print("Exiting...")
+            break
         else:
             print("Invalid option. Please try again.")
 
 def press_enter_to_continue():
     input("\nPress Enter to continue...")
 if __name__ == "__main__": # Run the main menu if this script is executed directly
-    main_menu() # Start the main menu
+    main_menu() # start the menu and activates all the functions

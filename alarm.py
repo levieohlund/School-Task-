@@ -17,15 +17,15 @@ def add_alarm(alarm_list, alarm):
 def list_alarms(alarm_list):
     return alarm_list
 
-def remove_alarm(alarm_list, number):
-    if 0 <= number < len(alarm_list):
-        del alarm_list[number]
-        return True
-    return False
+def remove_alarm(alarm_list, number):  # Removes an alarm by its index
+    if 0 <= number < len(alarm_list):  # Check if the alarm number is valid
+        del alarm_list[number]  # Remove the alarm from the list
+        return True  # Indicate success
+    return False  # Indicate failure if index is invalid
 
 
 
-def create_alarm_menu(alarm_list):
+def create_alarm_menu(alarm_list): 
     while True:
         print("\n--- Create Alarm ---")
         print("1. CPU usage")

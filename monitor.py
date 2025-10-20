@@ -36,14 +36,9 @@ def list_active_monitoring(active):
 
 
 def start_continuous_monitoring(alarm, check_alarms_func, press_enter_func):
-    """
-    Start continuous monitoring with alarm checking.
-    
-    Args:
-        alarm: List of alarm objects to check against
-        check_alarms_func: Function to check alarms (from alarm module)
-        press_enter_func: Function to wait for user input (from main module)
-    """
+
+    # Start continuous monitoring with alarm checking.
+
     print("\nStarting continuous monitoring. Press Ctrl+C to stop.")
     try: 
         while True: 
