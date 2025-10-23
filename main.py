@@ -2,13 +2,10 @@
 
 import monitor # Import the monitor module to access system monitoring functions
 from alarm import create_alarm_menu, remove_alarm, show_alarms_menu, check_alarms # Import alarm functions from alarm module
-import logger # Import the logger module for logging alarms
 
 def main_menu(): 
 
     alarms = [] # List to hold active alarms
-
-    active = False # see if the monitoring is active or not 
 
     while True: # Main menu loop
         print("\n--- Main Menu ---")
@@ -22,50 +19,52 @@ def main_menu():
 
         choice = input("\nChoose an option: ").strip()
 
-        if choice == "1":
-            # Show current CPU, memory, and disk usage
-            active = True  # check that monitoring is active 
-            print("Monitoring has started!")
+        match choice:
+            case "1":
+                # Show current CPU, memory, and disk usage
+                print("Monitoring has started!")
+                cpu = monitor.get_cpu_usage()
+                mem_pct, mem_used, mem_total = monitor.get_memory_usage() # Get current memory usage
+                disk_pct, disk_used, disk_total = monitor.get_disk_usage() # Get current disk usage
+                print(f"CPU Usage: {cpu}%")
+                print(f"Memory Usage: {mem_pct}% ({mem_used/1024**3:.1f} GB out of {mem_total/1024**3:.1f} GB used)") # 1024**3 converts bytes to GB 
+                print(f"Disk Usage: {disk_pct}% ({disk_used/1024**3:.1f} GB out of {disk_total/1024**3:.1f} GB used)")
+                press_enter_to_continue()
 
-            cpu = monitor.get_cpu_usage()
-            mem_pct, mem_used, mem_total = monitor.get_memory_usage() # Get current memory usage
-            disk_pct, disk_used, disk_total = monitor.get_disk_usage() # Get current disk usage
-            print(f"CPU Usage: {cpu}%")
-            print(f"Memory Usage: {mem_pct}% ({mem_used/1024**3:.1f} GB out of {mem_total/1024**3:.1f} GB used)") # 1024**3 converts bytes to GB 
-            print(f"Disk Usage: {disk_pct}% ({disk_used/1024**3:.1f} GB out of {disk_total/1024**3:.1f} GB used)")
-            press_enter_to_continue()
+            case "2":
+                print("\nActive Monitoring:")
+                print("- CPU Usage")
+                print("- Memory Usage") 
+                print("- Disk Usage")
+                press_enter_to_continue()
 
-        elif choice == "2":
-            print("\nActive Monitoring:")
-            print("- CPU Usage")
-            print("- Memory Usage") 
-            print("- Disk Usage")
-            press_enter_to_continue()
+            case "3":
+                create_alarm_menu(alarms) # Create a new alarm from the list of alarms
 
-        elif choice == "3":
-            create_alarm_menu(alarms) # Create a new alarm from the list of alarms
+            case "4":
+                show_alarms_menu(alarms) # Show the list of active alarms
 
-        elif choice == "4":
-            show_alarms_menu(alarms) # Show the list of active alarms
+            case "5":
+                show_alarms_menu(alarms)
+                try:
+                    alarm_number = int(input("Enter alarm number to remove: ")) - 1
+                    if remove_alarm(alarms, alarm_number):
+                        print("Alarm removed successfully.")
+                    else:
+                        print("Invalid alarm number.")
+                except ValueError:
+                    print("Please enter a valid number.")
+                press_enter_to_continue()
 
-        elif choice == "5":
-            try:
-                alarm_number = int(input("Enter alarm number to remove: ")) - 1
-                if remove_alarm(alarms, alarm_number):
-                    print("Alarm removed successfully.")
-                else:
-                    print("Invalid alarm number.")
-            except ValueError:
-                print("Please enter a valid number.")
-            press_enter_to_continue()
-
-        elif choice == "6":
-            monitor.start_continuous_monitoring(alarms, check_alarms, press_enter_to_continue)
-        elif choice == "7":
-            print("Exiting...")
-            break
-        else:
-            print("Invalid option. Please try again.")
+            case "6":
+                monitor.start_continuous_monitoring(alarms, check_alarms, press_enter_to_continue)
+                
+            case "7":
+                print("Exiting...")
+                break
+                
+            case _:
+                print("Invalid option. Please try again.")
 
 def press_enter_to_continue():
     input("\nPress Enter to continue...")

@@ -77,13 +77,12 @@ def check_alarms(alarm_list, cpu, memory, disk):
     triggered_alarms = []
 
     for alarm in alarm_list:
-        if alarm.monitor_type in current_values: # Kontrollera om alarmets monitor_type finns i current_values
-            current_value = current_values[alarm.monitor_type] # Hämta det aktuella värdet för monitor_type
-            if alarm.condition == "above" and current_value > alarm.threshold: # Kontrollera om villkoret är uppfyllt
-                triggered_alarms.append(f" Warning Alarm is Activated: {alarm.monitor_type.upper()} is {current_value}% (above {alarm.threshold}%)")
-            elif alarm.condition == "below" and current_value < alarm.threshold:
-                triggered_alarms.append(f" Warning Alarm is Activated: {alarm.monitor_type.upper()} is {current_value}% (below {alarm.threshold}%)")
+        current_value = current_values[alarm.monitor_type]
+        
+        is_triggered = (alarm.condition == "above" and current_value > alarm.threshold) or \
+                      (alarm.condition == "below" and current_value < alarm.threshold)
+        
+        if is_triggered:
+            triggered_alarms.append(f"Warning Alarm is activated! {alarm.monitor_type.upper()}: {current_value}% (limit: {alarm.threshold}%)")
 
     return triggered_alarms
-
-    # Returnera listan

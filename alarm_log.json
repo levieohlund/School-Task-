@@ -1,6 +1,5 @@
 [
   {
-    "time": "2025-10-16 16:03:24",
     "type": "cpu",
     "threshold": 20,
     "condition": "below"
@@ -83,6 +82,16 @@
   {
     "type": "disk",
     "threshold": 30,
+    "condition": "below"
+  },
+  {
+    "type": "memory",
+    "threshold": 10,
+    "condition": "above"
+  },
+  {
+    "type": "cpu",
+    "threshold": 1,
     "condition": "below"
   }
 ]
